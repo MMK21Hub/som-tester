@@ -3,6 +3,6 @@
 Secure-ish testing environment for CLI tools using Docker.
 
 ```bash
-docker build -t cli-sandbox .
-docker run --cap-drop=ALL -it cli-sandbox
+docker build -t som-tester .
+docker run --cap-drop=ALL --hostname=testy -it som-tester
 ```
