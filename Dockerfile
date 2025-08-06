@@ -9,11 +9,14 @@ RUN apt-get install -y \
     sudo \
     curl \
     git \
-    ca-certificates \
+    ca-certificates
+RUN apt-get install -y \
     bash \
     build-essential \
     micro \
-    wget
+    wget \
+    pkg-config \
+    libwayland-dev
 
 # Create a non-root user
 RUN useradd -ms /bin/bash tester
@@ -26,6 +29,7 @@ WORKDIR /home/tester
 USER tester
 RUN python3 -m pip install --user pipx
 RUN python3 -m pipx ensurepath
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 
 # Start in bash for interactive use
 CMD ["/bin/bash"]
