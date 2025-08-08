@@ -1,15 +1,16 @@
 FROM debian:bullseye
 
-# Install common utilities
-RUN apt-get update
-RUN apt-get install -y \
-    python3 \
-    python3-pip
 RUN apt-get install -y \
     sudo \
     curl \
     git \
     ca-certificates
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
+# Install common utilities
+RUN apt-get update
+RUN apt-get install -y \
+    python3 \
+    python3-pip
 RUN apt-get install -y \
     bash \
     build-essential \
@@ -17,7 +18,8 @@ RUN apt-get install -y \
     wget \
     pkg-config \
     libwayland-dev \
-    unzip
+    unzip \
+    python3-venv
 
 # Create a non-root user
 RUN useradd -ms /bin/bash tester
@@ -30,7 +32,6 @@ WORKDIR /home/tester
 USER tester
 RUN python3 -m pip install --user pipx
 RUN python3 -m pipx ensurepath
-RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 
 # Start in bash for interactive use
 CMD ["/bin/bash"]
