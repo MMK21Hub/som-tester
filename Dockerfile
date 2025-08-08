@@ -16,7 +16,8 @@ RUN apt-get install -y \
     micro \
     wget \
     pkg-config \
-    libwayland-dev
+    libwayland-dev \
+    unzip
 
 # Create a non-root user
 RUN useradd -ms /bin/bash tester
